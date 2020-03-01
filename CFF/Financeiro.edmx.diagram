@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="41bb2f5daaf546c3aafdb73e1a559b21" Name="Diagram1">
+        <EntityTypeShape EntityType="FINANCEIROModel.sysdiagram" Width="1.5" PointX="9.5" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FINANCEIROModel.TB_CONTA" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FINANCEIROModel.TB_LANCAMENTO" Width="2" PointX="8.125" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="FINANCEIROModel.TB_TITULO" Width="2.375" PointX="4.125" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="FINANCEIROModel.FK_TB_CONTA" ManuallyRouted="false" />
+        <AssociationConnector Association="FINANCEIROModel.FK_TB_TITULO" ManuallyRouted="false" />
+        <AssociationConnector Association="FINANCEIROModel.FK_TB_CONTA_TB_CONTA" />
+        <EntityTypeShape EntityType="FINANCEIROModel.TB_CARTAO" Width="1.875" PointX="1.125" PointY="5.125" />
+        <EntityTypeShape EntityType="FINANCEIROModel.TB_CLASSIFICACAO" Width="1.875" PointX="6.875" PointY="4.375" />
+        <EntityTypeShape EntityType="FINANCEIROModel.TB_MOVIMENTO_CARTAO" Width="2.25" PointX="4.25" PointY="5.625" />
+        <AssociationConnector Association="FINANCEIROModel.FK_TB_MOVIMENTO_CARTAO_TB_CARTAO" />
+        <AssociationConnector Association="FINANCEIROModel.FK_TB_MOVIMENTO_CARTAO_TB_CONTA" />
+        <EntityTypeShape EntityType="FINANCEIROModel.vw_titulo" Width="1.5" PointX="6.875" PointY="6.375" />
+        <AssociationConnector Association="FINANCEIROModel.FK_TB_CARTAO_TB_CONTA" />
+        <AssociationConnector Association="FINANCEIROModel.FK_TB_TITULO_TB_TITULO" />
+        <AssociationConnector Association="FINANCEIROModel.FK_TB_MOVIMENTO_CARTAO_TB_TITULO_a" />
+        <AssociationConnector Association="FINANCEIROModel.FK_TB_MOVIMENTO_CARTAO_TB_TITULO_b" />
+        <EntityTypeShape EntityType="FINANCEIROModel.TB_PARCELA" Width="1.5" PointX="11.625" PointY="8" />
+        <EntityTypeShape EntityType="FINANCEIROModel.TB_PARCELAMENTO" Width="1.5" PointX="9.375" PointY="8" />
+        <AssociationConnector Association="FINANCEIROModel.FK_TB_PARCELA_TB_PARCELAMENTO" />
+        <AssociationConnector Association="FINANCEIROModel.FK_TB_PARCELA_TB_PARCELAMENTO1" />
+        <AssociationConnector Association="FINANCEIROModel.FK_TB_PARCELAMENTO_TB_TITULO" />
+        <EntityTypeShape EntityType="FINANCEIROModel.vw_parcelamento" Width="1.5" PointX="0.75" PointY="8.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

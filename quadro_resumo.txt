@@ -1,0 +1,17 @@
+Receita:
+	- prevista: 1500,00
+	- realizada: 5000,00
+
+Despesa: 
+	- prevista: 6000,00
+	- realizada: 3500,00
+
+Pago: 4000,00
+
+Caixa: 1000,00
+
+A Pagar: 2000,00
+
+Faltando: 1000,00
+
+Sobrando: 0

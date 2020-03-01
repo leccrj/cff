@@ -1,0 +1,1117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FINANCEIROModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TB_CARTAO">
+          <Key>
+            <PropertyRef Name="COD_CARTAO" />
+          </Key>
+          <Property Name="COD_CARTAO" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COD_CONTA" Type="numeric" Precision="3" Scale="0" />
+          <Property Name="DESCRICAO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NUMERO" Type="nchar" MaxLength="16" Nullable="false" />
+          <Property Name="DIA_VENCIMENTO" Type="smallint" Nullable="false" />
+          <Property Name="OBSERVACAO" Type="nvarchar" MaxLength="150" />
+          <Property Name="DAT_CADASTRO" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_CLASSIFICACAO">
+          <Key>
+            <PropertyRef Name="COD_CLASSIFICACAO" />
+          </Key>
+          <Property Name="COD_CLASSIFICACAO" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRICAO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OBSERVACAO" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="TB_CONTA">
+          <Key>
+            <PropertyRef Name="COD_CONTA" />
+          </Key>
+          <Property Name="COD_CONTA" Type="numeric" Precision="3" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COD_CONTA_RAIZ" Type="numeric" Precision="3" Scale="0" />
+          <Property Name="DESCRICAO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TIPO" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="OBSERVACAO" Type="nvarchar" MaxLength="500" />
+          <Property Name="NUM_ORDEM" Type="smallint" />
+          <Property Name="VAL_COR" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TB_LANCAMENTO">
+          <Key>
+            <PropertyRef Name="COD_LANCAMENTO" />
+          </Key>
+          <Property Name="COD_LANCAMENTO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COD_TITULO" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="VALOR" Type="money" Nullable="false" />
+          <Property Name="DATA" Type="date" Nullable="false" />
+          <Property Name="OBSERVACAO" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="TB_MOVIMENTO_CARTAO">
+          <Key>
+            <PropertyRef Name="SEQ_MOVIMENTO" />
+          </Key>
+          <Property Name="SEQ_MOVIMENTO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COD_CARTAO" Type="smallint" Nullable="false" />
+          <Property Name="COD_CONTA" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="COD_TITULO" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DESCRICAO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DAT_MOVIMENTO" Type="smalldatetime" Nullable="false" />
+          <Property Name="VALOR" Type="smallmoney" Nullable="false" />
+          <Property Name="NUM_PARCELA" Type="smallint" />
+          <Property Name="OBSERVACAO" Type="nvarchar" MaxLength="150" />
+          <Property Name="DAT_CADASTRO" Type="smalldatetime" Nullable="false" />
+          <Property Name="COD_TITULO_DESPESA" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="TB_PARCELA">
+          <Key>
+            <PropertyRef Name="SEQ_PARCELA" />
+          </Key>
+          <Property Name="SEQ_PARCELA" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SEQ_PARCELAMENTO" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="NUM_PARCELA" Type="smallint" Nullable="false" />
+          <Property Name="VALOR" Type="money" Nullable="false" />
+          <Property Name="DAT_VENCIMENTO" Type="smalldatetime" Nullable="false" />
+          <Property Name="COD_TITULO" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="OBSERVACAO" Type="varchar" MaxLength="500" />
+          <Property Name="DAT_CADASTRO" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_PARCELAMENTO">
+          <Key>
+            <PropertyRef Name="SEQ_PARCELAMENTO" />
+          </Key>
+          <Property Name="SEQ_PARCELAMENTO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRICAO" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="QTD_PARCELA" Type="smallint" Nullable="false" />
+          <Property Name="VALOR" Type="money" Nullable="false" />
+          <Property Name="COD_TITULO" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DAT_INICIO" Type="smalldatetime" Nullable="false" />
+          <Property Name="DAT_CADASTRO" Type="smalldatetime" Nullable="false" />
+          <Property Name="OBSERVACAO" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="TB_TITULO">
+          <Key>
+            <PropertyRef Name="COD_TITULO" />
+          </Key>
+          <Property Name="COD_TITULO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COD_CONTA" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="DESCRICAO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DAT_VENCIMENTO" Type="date" Nullable="false" />
+          <Property Name="VALOR" Type="money" Nullable="false" />
+          <Property Name="NUM_PARCELA" Type="smallint" />
+          <Property Name="OBSERVACAO" Type="nvarchar" MaxLength="500" />
+          <Property Name="DAT_CADASTRO" Type="smalldatetime" />
+          <Property Name="COD_TITULO_ORIGEM" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DAT_PLANEJAMENTO" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FINANCEIRO.dbo.vw_parcelamento' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_parcelamento">
+          <Key>
+            <PropertyRef Name="seq_parcelamento" />
+            <PropertyRef Name="descricao" />
+            <PropertyRef Name="valor" />
+            <PropertyRef Name="qtd_parcela" />
+            <PropertyRef Name="dat_inicio" />
+          </Key>
+          <Property Name="seq_parcelamento" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descricao" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="valor" Type="money" Nullable="false" />
+          <Property Name="qtd_parcela" Type="smallint" Nullable="false" />
+          <Property Name="dat_inicio" Type="smalldatetime" Nullable="false" />
+          <Property Name="qtd_parcela_paga" Type="int" />
+          <Property Name="valor_pago" Type="money" />
+          <Property Name="qtd_mes" Type="int" />
+          <Property Name="situacao" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FINANCEIRO.dbo.vw_titulo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_titulo">
+          <Key>
+            <PropertyRef Name="DESC_CONTA" />
+            <PropertyRef Name="COD_CONTA" />
+            <PropertyRef Name="TIPO" />
+            <PropertyRef Name="COD_TITULO" />
+            <PropertyRef Name="DAT_VENCIMENTO" />
+            <PropertyRef Name="DESCRICAO" />
+            <PropertyRef Name="VALOR" />
+            
+            <PropertyRef Name="VAL_TITULO" />
+            
+            <PropertyRef Name="cod_conta_raiz" />
+          </Key>
+          <Property Name="DESC_RAIZ" Type="nvarchar" MaxLength="50" />
+          <Property Name="DESC_CONTA" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="COD_LANCAMENTO" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="COD_CONTA" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="TIPO" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="COD_TITULO" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DAT_CADASTRO" Type="smalldatetime" />
+          <Property Name="DAT_VENCIMENTO" Type="date" Nullable="false" />
+          <Property Name="DESCRICAO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NUM_PARCELA" Type="smallint" />
+          <Property Name="OBSERVACAO" Type="nvarchar" MaxLength="500" />
+          <Property Name="VALOR" Type="money" Nullable="false" />
+          <Property Name="VAL_PAGO" Type="money" Nullable="false" />
+          <Property Name="VAL_TITULO" Type="money" Nullable="false" />
+          <Property Name="DAT_PAGAMENTO" Type="date" />
+          <Property Name="VAL_RESTANTE" Type="money" />
+          <Property Name="NUM_ORDEM" Type="smallint" Nullable="false" />
+          <Property Name="VAL_COR" Type="varchar" MaxLength="50" />
+          <Property Name="cod_conta_raiz" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="seq_parcela" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DAT_PLANEJAMENTO" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'FINANCEIRO.dbo.vw_total_conta' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="vw_total_conta">
+          <Property Name="desc_raiz" Type="nvarchar" MaxLength="50" />
+          <Property Name="val_pago" Type="money" />
+        </EntityType>-->
+        <Association Name="FK_TB_CARTAO_TB_CONTA">
+          <End Role="TB_CONTA" Type="Self.TB_CONTA" Multiplicity="0..1" />
+          <End Role="TB_CARTAO" Type="Self.TB_CARTAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CONTA">
+              <PropertyRef Name="COD_CONTA" />
+            </Principal>
+            <Dependent Role="TB_CARTAO">
+              <PropertyRef Name="COD_CONTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_CONTA">
+          <End Role="TB_CONTA" Type="Self.TB_CONTA" Multiplicity="1" />
+          <End Role="TB_TITULO" Type="Self.TB_TITULO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CONTA">
+              <PropertyRef Name="COD_CONTA" />
+            </Principal>
+            <Dependent Role="TB_TITULO">
+              <PropertyRef Name="COD_CONTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_CONTA_TB_CONTA">
+          <End Role="TB_CONTA" Type="Self.TB_CONTA" Multiplicity="0..1" />
+          <End Role="TB_CONTA1" Type="Self.TB_CONTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CONTA">
+              <PropertyRef Name="COD_CONTA" />
+            </Principal>
+            <Dependent Role="TB_CONTA1">
+              <PropertyRef Name="COD_CONTA_RAIZ" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_MOVIMENTO_CARTAO_TB_CARTAO">
+          <End Role="TB_CARTAO" Type="Self.TB_CARTAO" Multiplicity="1" />
+          <End Role="TB_MOVIMENTO_CARTAO" Type="Self.TB_MOVIMENTO_CARTAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CARTAO">
+              <PropertyRef Name="COD_CARTAO" />
+            </Principal>
+            <Dependent Role="TB_MOVIMENTO_CARTAO">
+              <PropertyRef Name="COD_CARTAO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_MOVIMENTO_CARTAO_TB_CONTA">
+          <End Role="TB_CONTA" Type="Self.TB_CONTA" Multiplicity="1" />
+          <End Role="TB_MOVIMENTO_CARTAO" Type="Self.TB_MOVIMENTO_CARTAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CONTA">
+              <PropertyRef Name="COD_CONTA" />
+            </Principal>
+            <Dependent Role="TB_MOVIMENTO_CARTAO">
+              <PropertyRef Name="COD_CONTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_MOVIMENTO_CARTAO_TB_TITULO_a">
+          <End Role="TB_TITULO" Type="Self.TB_TITULO" Multiplicity="1" />
+          <End Role="TB_MOVIMENTO_CARTAO" Type="Self.TB_MOVIMENTO_CARTAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_TITULO">
+              <PropertyRef Name="COD_TITULO" />
+            </Principal>
+            <Dependent Role="TB_MOVIMENTO_CARTAO">
+              <PropertyRef Name="COD_TITULO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_MOVIMENTO_CARTAO_TB_TITULO_b">
+          <End Role="TB_TITULO" Type="Self.TB_TITULO" Multiplicity="0..1" />
+          <End Role="TB_MOVIMENTO_CARTAO" Type="Self.TB_MOVIMENTO_CARTAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_TITULO">
+              <PropertyRef Name="COD_TITULO" />
+            </Principal>
+            <Dependent Role="TB_MOVIMENTO_CARTAO">
+              <PropertyRef Name="COD_TITULO_DESPESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_PARCELA_TB_PARCELAMENTO">
+          <End Role="TB_PARCELAMENTO" Type="Self.TB_PARCELAMENTO" Multiplicity="1" />
+          <End Role="TB_PARCELA" Type="Self.TB_PARCELA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_PARCELAMENTO">
+              <PropertyRef Name="SEQ_PARCELAMENTO" />
+            </Principal>
+            <Dependent Role="TB_PARCELA">
+              <PropertyRef Name="SEQ_PARCELAMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_PARCELA_TB_TITULO">
+          <End Role="TB_TITULO" Type="Self.TB_TITULO" Multiplicity="0..1" />
+          <End Role="TB_PARCELA" Type="Self.TB_PARCELA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_TITULO">
+              <PropertyRef Name="COD_TITULO" />
+            </Principal>
+            <Dependent Role="TB_PARCELA">
+              <PropertyRef Name="COD_TITULO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_PARCELAMENTO_TB_TITULO">
+          <End Role="TB_TITULO" Type="Self.TB_TITULO" Multiplicity="0..1" />
+          <End Role="TB_PARCELAMENTO" Type="Self.TB_PARCELAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_TITULO">
+              <PropertyRef Name="COD_TITULO" />
+            </Principal>
+            <Dependent Role="TB_PARCELAMENTO">
+              <PropertyRef Name="COD_TITULO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_TITULO">
+          <End Role="TB_TITULO" Type="Self.TB_TITULO" Multiplicity="1" />
+          <End Role="TB_LANCAMENTO" Type="Self.TB_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_TITULO">
+              <PropertyRef Name="COD_TITULO" />
+            </Principal>
+            <Dependent Role="TB_LANCAMENTO">
+              <PropertyRef Name="COD_TITULO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_TITULO_TB_TITULO">
+          <End Role="TB_TITULO" Type="Self.TB_TITULO" Multiplicity="0..1" />
+          <End Role="TB_TITULO1" Type="Self.TB_TITULO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_TITULO">
+              <PropertyRef Name="COD_TITULO" />
+            </Principal>
+            <Dependent Role="TB_TITULO1">
+              <PropertyRef Name="COD_TITULO_ORIGEM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_credito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="money">
+          <Parameter Name="p_data_inicio" Type="smalldatetime" Mode="In" />
+          <Parameter Name="p_data_final" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="fn_situacao_parcelamento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="p_seq_parcelamento" Type="numeric" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_credito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_data_inicio" Type="smalldatetime" Mode="In" />
+          <Parameter Name="p_data_final" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="FINANCEIROModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_CARTAO" EntityType="Self.TB_CARTAO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_CLASSIFICACAO" EntityType="Self.TB_CLASSIFICACAO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_CONTA" EntityType="Self.TB_CONTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_LANCAMENTO" EntityType="Self.TB_LANCAMENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_MOVIMENTO_CARTAO" EntityType="Self.TB_MOVIMENTO_CARTAO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_PARCELA" EntityType="Self.TB_PARCELA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_PARCELAMENTO" EntityType="Self.TB_PARCELAMENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_TITULO" EntityType="Self.TB_TITULO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_parcelamento" EntityType="Self.vw_parcelamento" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_parcelamento].[seq_parcelamento] AS [seq_parcelamento], 
+    [vw_parcelamento].[descricao] AS [descricao], 
+    [vw_parcelamento].[valor] AS [valor], 
+    [vw_parcelamento].[qtd_parcela] AS [qtd_parcela], 
+    [vw_parcelamento].[dat_inicio] AS [dat_inicio], 
+    [vw_parcelamento].[qtd_parcela_paga] AS [qtd_parcela_paga], 
+    [vw_parcelamento].[valor_pago] AS [valor_pago], 
+    [vw_parcelamento].[qtd_mes] AS [qtd_mes], 
+    [vw_parcelamento].[situacao] AS [situacao]
+    FROM [dbo].[vw_parcelamento] AS [vw_parcelamento]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_titulo" EntityType="Self.vw_titulo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_titulo].[DESC_RAIZ] AS [DESC_RAIZ], 
+    [vw_titulo].[DESC_CONTA] AS [DESC_CONTA], 
+    [vw_titulo].[COD_LANCAMENTO] AS [COD_LANCAMENTO], 
+    [vw_titulo].[COD_CONTA] AS [COD_CONTA], 
+    [vw_titulo].[TIPO] AS [TIPO], 
+    [vw_titulo].[COD_TITULO] AS [COD_TITULO], 
+    [vw_titulo].[DAT_CADASTRO] AS [DAT_CADASTRO], 
+    [vw_titulo].[DAT_VENCIMENTO] AS [DAT_VENCIMENTO], 
+    [vw_titulo].[DESCRICAO] AS [DESCRICAO], 
+    [vw_titulo].[NUM_PARCELA] AS [NUM_PARCELA], 
+    [vw_titulo].[OBSERVACAO] AS [OBSERVACAO], 
+    [vw_titulo].[VALOR] AS [VALOR], 
+    [vw_titulo].[VAL_PAGO] AS [VAL_PAGO], 
+    [vw_titulo].[VAL_TITULO] AS [VAL_TITULO], 
+    [vw_titulo].[DAT_PAGAMENTO] AS [DAT_PAGAMENTO], 
+    [vw_titulo].[VAL_RESTANTE] AS [VAL_RESTANTE], 
+    [vw_titulo].[NUM_ORDEM] AS [NUM_ORDEM], 
+    [vw_titulo].[VAL_COR] AS [VAL_COR], 
+    [vw_titulo].[cod_conta_raiz] AS [cod_conta_raiz], 
+    [vw_titulo].[seq_parcela] AS [seq_parcela], 
+    [vw_titulo].[DAT_PLANEJAMENTO] AS [DAT_PLANEJAMENTO]
+    FROM [dbo].[vw_titulo] AS [vw_titulo]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_TB_CARTAO_TB_CONTA" Association="Self.FK_TB_CARTAO_TB_CONTA">
+            <End Role="TB_CONTA" EntitySet="TB_CONTA" />
+            <End Role="TB_CARTAO" EntitySet="TB_CARTAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_CONTA" Association="Self.FK_TB_CONTA">
+            <End Role="TB_CONTA" EntitySet="TB_CONTA" />
+            <End Role="TB_TITULO" EntitySet="TB_TITULO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_CONTA_TB_CONTA" Association="Self.FK_TB_CONTA_TB_CONTA">
+            <End Role="TB_CONTA" EntitySet="TB_CONTA" />
+            <End Role="TB_CONTA1" EntitySet="TB_CONTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_MOVIMENTO_CARTAO_TB_CARTAO" Association="Self.FK_TB_MOVIMENTO_CARTAO_TB_CARTAO">
+            <End Role="TB_CARTAO" EntitySet="TB_CARTAO" />
+            <End Role="TB_MOVIMENTO_CARTAO" EntitySet="TB_MOVIMENTO_CARTAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_MOVIMENTO_CARTAO_TB_CONTA" Association="Self.FK_TB_MOVIMENTO_CARTAO_TB_CONTA">
+            <End Role="TB_CONTA" EntitySet="TB_CONTA" />
+            <End Role="TB_MOVIMENTO_CARTAO" EntitySet="TB_MOVIMENTO_CARTAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_MOVIMENTO_CARTAO_TB_TITULO_a" Association="Self.FK_TB_MOVIMENTO_CARTAO_TB_TITULO_a">
+            <End Role="TB_TITULO" EntitySet="TB_TITULO" />
+            <End Role="TB_MOVIMENTO_CARTAO" EntitySet="TB_MOVIMENTO_CARTAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_MOVIMENTO_CARTAO_TB_TITULO_b" Association="Self.FK_TB_MOVIMENTO_CARTAO_TB_TITULO_b">
+            <End Role="TB_TITULO" EntitySet="TB_TITULO" />
+            <End Role="TB_MOVIMENTO_CARTAO" EntitySet="TB_MOVIMENTO_CARTAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_PARCELA_TB_PARCELAMENTO" Association="Self.FK_TB_PARCELA_TB_PARCELAMENTO">
+            <End Role="TB_PARCELAMENTO" EntitySet="TB_PARCELAMENTO" />
+            <End Role="TB_PARCELA" EntitySet="TB_PARCELA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_PARCELA_TB_TITULO" Association="Self.FK_TB_PARCELA_TB_TITULO">
+            <End Role="TB_TITULO" EntitySet="TB_TITULO" />
+            <End Role="TB_PARCELA" EntitySet="TB_PARCELA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_PARCELAMENTO_TB_TITULO" Association="Self.FK_TB_PARCELAMENTO_TB_TITULO">
+            <End Role="TB_TITULO" EntitySet="TB_TITULO" />
+            <End Role="TB_PARCELAMENTO" EntitySet="TB_PARCELAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_TITULO" Association="Self.FK_TB_TITULO">
+            <End Role="TB_TITULO" EntitySet="TB_TITULO" />
+            <End Role="TB_LANCAMENTO" EntitySet="TB_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_TITULO_TB_TITULO" Association="Self.FK_TB_TITULO_TB_TITULO">
+            <End Role="TB_TITULO" EntitySet="TB_TITULO" />
+            <End Role="TB_TITULO1" EntitySet="TB_TITULO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FINANCEIROModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TB_CONTA">
+          <Key>
+            <PropertyRef Name="COD_CONTA" />
+          </Key>
+          <Property Name="COD_CONTA" Type="Decimal" Precision="3" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRICAO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TIPO" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="OBSERVACAO" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TB_TITULO" Relationship="Self.FK_TB_CONTA" FromRole="TB_CONTA" ToRole="TB_TITULO" />
+          <Property Name="COD_CONTA_RAIZ" Type="Decimal" Precision="3" Scale="0" />
+          <NavigationProperty Name="TB_CONTA1" Relationship="FINANCEIROModel.FK_TB_CONTA_TB_CONTA" FromRole="TB_CONTA" ToRole="TB_CONTA1" />
+          <NavigationProperty Name="TB_CONTA2" Relationship="FINANCEIROModel.FK_TB_CONTA_TB_CONTA" FromRole="TB_CONTA1" ToRole="TB_CONTA" />
+          <NavigationProperty Name="TB_MOVIMENTO_CARTAO" Relationship="FINANCEIROModel.FK_TB_MOVIMENTO_CARTAO_TB_CONTA" FromRole="TB_CONTA" ToRole="TB_MOVIMENTO_CARTAO" />
+          <NavigationProperty Name="TB_CARTAO" Relationship="FINANCEIROModel.FK_TB_CARTAO_TB_CONTA" FromRole="TB_CONTA" ToRole="TB_CARTAO" />
+          <Property Name="NUM_ORDEM" Type="Int16" />
+          <Property Name="VAL_COR" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TB_LANCAMENTO">
+          <Key>
+            <PropertyRef Name="COD_LANCAMENTO" />
+          </Key>
+          <Property Name="COD_LANCAMENTO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COD_TITULO" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="VALOR" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DATA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OBSERVACAO" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TB_TITULO" Relationship="Self.FK_TB_TITULO" FromRole="TB_LANCAMENTO" ToRole="TB_TITULO" />
+        </EntityType>
+        <EntityType Name="TB_TITULO">
+          <Key>
+            <PropertyRef Name="COD_TITULO" />
+          </Key>
+          <Property Name="COD_TITULO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRICAO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DAT_VENCIMENTO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VALOR" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="COD_CONTA" Type="Decimal" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="OBSERVACAO" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TB_CONTA" Relationship="Self.FK_TB_CONTA" FromRole="TB_TITULO" ToRole="TB_CONTA" />
+          <NavigationProperty Name="TB_LANCAMENTO" Relationship="Self.FK_TB_TITULO" FromRole="TB_TITULO" ToRole="TB_LANCAMENTO" />
+          <Property Name="NUM_PARCELA" Type="Int16" />
+          <Property Name="DAT_CADASTRO" Type="DateTime" Precision="0" />
+          <Property Name="COD_TITULO_ORIGEM" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="TB_TITULO1" Relationship="FINANCEIROModel.FK_TB_TITULO_TB_TITULO" FromRole="TB_TITULO" ToRole="TB_TITULO1" />
+          <NavigationProperty Name="TB_TITULO2" Relationship="FINANCEIROModel.FK_TB_TITULO_TB_TITULO" FromRole="TB_TITULO1" ToRole="TB_TITULO" />
+          <NavigationProperty Name="TB_MOVIMENTO_CARTAO" Relationship="FINANCEIROModel.FK_TB_MOVIMENTO_CARTAO_TB_TITULO_a" FromRole="TB_TITULO" ToRole="TB_MOVIMENTO_CARTAO" />
+          <NavigationProperty Name="TB_MOVIMENTO_CARTAO1" Relationship="FINANCEIROModel.FK_TB_MOVIMENTO_CARTAO_TB_TITULO_b" FromRole="TB_TITULO" ToRole="TB_MOVIMENTO_CARTAO" />
+          <NavigationProperty Name="TB_PARCELA" Relationship="FINANCEIROModel.FK_TB_PARCELA_TB_PARCELAMENTO1" FromRole="TB_TITULO" ToRole="TB_PARCELA" />
+          <NavigationProperty Name="TB_PARCELAMENTO" Relationship="FINANCEIROModel.FK_TB_PARCELAMENTO_TB_TITULO" FromRole="TB_TITULO" ToRole="TB_PARCELAMENTO" />
+          <Property Name="DAT_PLANEJAMENTO" Type="DateTime" Precision="0" />
+        </EntityType>
+        <Association Name="FK_TB_CONTA">
+          <End Role="TB_CONTA" Type="Self.TB_CONTA" Multiplicity="1" />
+          <End Role="TB_TITULO" Type="Self.TB_TITULO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CONTA">
+              <PropertyRef Name="COD_CONTA" />
+            </Principal>
+            <Dependent Role="TB_TITULO">
+              <PropertyRef Name="COD_CONTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_TITULO">
+          <End Role="TB_TITULO" Type="Self.TB_TITULO" Multiplicity="1" />
+          <End Role="TB_LANCAMENTO" Type="Self.TB_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_TITULO">
+              <PropertyRef Name="COD_TITULO" />
+            </Principal>
+            <Dependent Role="TB_LANCAMENTO">
+              <PropertyRef Name="COD_TITULO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FINANCEIROEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TB_CONTA" EntityType="Self.TB_CONTA" />
+          <EntitySet Name="TB_LANCAMENTO" EntityType="Self.TB_LANCAMENTO" />
+          <EntitySet Name="TB_TITULO" EntityType="Self.TB_TITULO" />
+          <AssociationSet Name="FK_TB_CONTA" Association="Self.FK_TB_CONTA">
+            <End Role="TB_CONTA" EntitySet="TB_CONTA" />
+            <End Role="TB_TITULO" EntitySet="TB_TITULO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_TITULO" Association="Self.FK_TB_TITULO">
+            <End Role="TB_TITULO" EntitySet="TB_TITULO" />
+            <End Role="TB_LANCAMENTO" EntitySet="TB_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_CONTA_TB_CONTA" Association="FINANCEIROModel.FK_TB_CONTA_TB_CONTA">
+            <End Role="TB_CONTA" EntitySet="TB_CONTA" />
+            <End Role="TB_CONTA1" EntitySet="TB_CONTA" />
+          </AssociationSet>
+          <EntitySet Name="TB_CARTAO" EntityType="FINANCEIROModel.TB_CARTAO" />
+          <EntitySet Name="TB_CLASSIFICACAO" EntityType="FINANCEIROModel.TB_CLASSIFICACAO" />
+          <EntitySet Name="TB_MOVIMENTO_CARTAO" EntityType="FINANCEIROModel.TB_MOVIMENTO_CARTAO" />
+          <AssociationSet Name="FK_TB_MOVIMENTO_CARTAO_TB_CARTAO" Association="FINANCEIROModel.FK_TB_MOVIMENTO_CARTAO_TB_CARTAO">
+            <End Role="TB_CARTAO" EntitySet="TB_CARTAO" />
+            <End Role="TB_MOVIMENTO_CARTAO" EntitySet="TB_MOVIMENTO_CARTAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_MOVIMENTO_CARTAO_TB_CONTA" Association="FINANCEIROModel.FK_TB_MOVIMENTO_CARTAO_TB_CONTA">
+            <End Role="TB_CONTA" EntitySet="TB_CONTA" />
+            <End Role="TB_MOVIMENTO_CARTAO" EntitySet="TB_MOVIMENTO_CARTAO" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(FINANCEIROModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(FINANCEIROModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="vw_titulo" EntityType="FINANCEIROModel.vw_titulo" />
+          <AssociationSet Name="FK_TB_CARTAO_TB_CONTA" Association="FINANCEIROModel.FK_TB_CARTAO_TB_CONTA">
+            <End Role="TB_CONTA" EntitySet="TB_CONTA" />
+            <End Role="TB_CARTAO" EntitySet="TB_CARTAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_TITULO_TB_TITULO" Association="FINANCEIROModel.FK_TB_TITULO_TB_TITULO">
+            <End Role="TB_TITULO" EntitySet="TB_TITULO" />
+            <End Role="TB_TITULO1" EntitySet="TB_TITULO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_MOVIMENTO_CARTAO_TB_TITULO_a" Association="FINANCEIROModel.FK_TB_MOVIMENTO_CARTAO_TB_TITULO_a">
+            <End Role="TB_TITULO" EntitySet="TB_TITULO" />
+            <End Role="TB_MOVIMENTO_CARTAO" EntitySet="TB_MOVIMENTO_CARTAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_MOVIMENTO_CARTAO_TB_TITULO_b" Association="FINANCEIROModel.FK_TB_MOVIMENTO_CARTAO_TB_TITULO_b">
+            <End Role="TB_TITULO" EntitySet="TB_TITULO" />
+            <End Role="TB_MOVIMENTO_CARTAO" EntitySet="TB_MOVIMENTO_CARTAO" />
+          </AssociationSet>
+          <EntitySet Name="TB_PARCELA" EntityType="FINANCEIROModel.TB_PARCELA" />
+          <EntitySet Name="TB_PARCELAMENTO" EntityType="FINANCEIROModel.TB_PARCELAMENTO" />
+          <AssociationSet Name="FK_TB_PARCELA_TB_PARCELAMENTO" Association="FINANCEIROModel.FK_TB_PARCELA_TB_PARCELAMENTO">
+            <End Role="TB_PARCELAMENTO" EntitySet="TB_PARCELAMENTO" />
+            <End Role="TB_PARCELA" EntitySet="TB_PARCELA" />
+          </AssociationSet>
+          <FunctionImport Name="sp_credito" ReturnType="Collection(Decimal)">
+            <Parameter Name="p_data_inicio" Mode="In" Type="DateTime" />
+            <Parameter Name="p_data_final" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <AssociationSet Name="FK_TB_PARCELA_TB_PARCELAMENTO1" Association="FINANCEIROModel.FK_TB_PARCELA_TB_PARCELAMENTO1">
+            <End Role="TB_TITULO" EntitySet="TB_TITULO" />
+            <End Role="TB_PARCELA" EntitySet="TB_PARCELA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_PARCELAMENTO_TB_TITULO" Association="FINANCEIROModel.FK_TB_PARCELAMENTO_TB_TITULO">
+            <End Role="TB_TITULO" EntitySet="TB_TITULO" />
+            <End Role="TB_PARCELAMENTO" EntitySet="TB_PARCELAMENTO" />
+          </AssociationSet>
+          <EntitySet Name="vw_parcelamento" EntityType="FINANCEIROModel.vw_parcelamento" />
+        </EntityContainer>
+        <Association Name="FK_TB_CONTA_TB_CONTA">
+          <End Type="FINANCEIROModel.TB_CONTA" Role="TB_CONTA" Multiplicity="0..1" />
+          <End Type="FINANCEIROModel.TB_CONTA" Role="TB_CONTA1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CONTA">
+              <PropertyRef Name="COD_CONTA" />
+            </Principal>
+            <Dependent Role="TB_CONTA1">
+              <PropertyRef Name="COD_CONTA_RAIZ" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TB_CARTAO">
+          <Key>
+            <PropertyRef Name="COD_CARTAO" />
+          </Key>
+          <Property Name="COD_CARTAO" Type="Int16" Nullable="false" />
+          <Property Name="DESCRICAO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NUMERO" Type="String" Nullable="false" MaxLength="16" FixedLength="true" Unicode="true" />
+          <Property Name="DIA_VENCIMENTO" Type="Int16" Nullable="false" />
+          <Property Name="OBSERVACAO" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DAT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="TB_MOVIMENTO_CARTAO" Relationship="FINANCEIROModel.FK_TB_MOVIMENTO_CARTAO_TB_CARTAO" FromRole="TB_CARTAO" ToRole="TB_MOVIMENTO_CARTAO" />
+          <Property Name="COD_CONTA" Type="Decimal" Precision="3" Scale="0" />
+          <NavigationProperty Name="TB_CONTA" Relationship="FINANCEIROModel.FK_TB_CARTAO_TB_CONTA" FromRole="TB_CARTAO" ToRole="TB_CONTA" />
+        </EntityType>
+        <EntityType Name="TB_CLASSIFICACAO">
+          <Key>
+            <PropertyRef Name="COD_CLASSIFICACAO" />
+          </Key>
+          <Property Name="COD_CLASSIFICACAO" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRICAO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OBSERVACAO" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TB_MOVIMENTO_CARTAO">
+          <Key>
+            <PropertyRef Name="SEQ_MOVIMENTO" />
+          </Key>
+          <Property Name="SEQ_MOVIMENTO" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COD_CARTAO" Type="Int16" Nullable="false" />
+          <Property Name="COD_CONTA" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+          <Property Name="DESCRICAO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DAT_MOVIMENTO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VALOR" Type="Decimal" Nullable="false" Precision="10" Scale="4" />
+          <Property Name="NUM_PARCELA" Type="Int16" />
+          <Property Name="OBSERVACAO" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DAT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="TB_CARTAO" Relationship="FINANCEIROModel.FK_TB_MOVIMENTO_CARTAO_TB_CARTAO" FromRole="TB_MOVIMENTO_CARTAO" ToRole="TB_CARTAO" />
+          <NavigationProperty Name="TB_CONTA" Relationship="FINANCEIROModel.FK_TB_MOVIMENTO_CARTAO_TB_CONTA" FromRole="TB_MOVIMENTO_CARTAO" ToRole="TB_CONTA" />
+          <Property Name="COD_TITULO" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="TB_TITULO" Relationship="FINANCEIROModel.FK_TB_MOVIMENTO_CARTAO_TB_TITULO_a" FromRole="TB_MOVIMENTO_CARTAO" ToRole="TB_TITULO" />
+          <Property Name="COD_TITULO_DESPESA" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="TB_TITULO1" Relationship="FINANCEIROModel.FK_TB_MOVIMENTO_CARTAO_TB_TITULO_b" FromRole="TB_MOVIMENTO_CARTAO" ToRole="TB_TITULO" />
+        </EntityType>
+        <Association Name="FK_TB_MOVIMENTO_CARTAO_TB_CARTAO">
+          <End Type="FINANCEIROModel.TB_CARTAO" Role="TB_CARTAO" Multiplicity="1" />
+          <End Type="FINANCEIROModel.TB_MOVIMENTO_CARTAO" Role="TB_MOVIMENTO_CARTAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CARTAO">
+              <PropertyRef Name="COD_CARTAO" />
+            </Principal>
+            <Dependent Role="TB_MOVIMENTO_CARTAO">
+              <PropertyRef Name="COD_CARTAO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_MOVIMENTO_CARTAO_TB_CONTA">
+          <End Type="FINANCEIROModel.TB_CONTA" Role="TB_CONTA" Multiplicity="1" />
+          <End Type="FINANCEIROModel.TB_MOVIMENTO_CARTAO" Role="TB_MOVIMENTO_CARTAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CONTA">
+              <PropertyRef Name="COD_CONTA" />
+            </Principal>
+            <Dependent Role="TB_MOVIMENTO_CARTAO">
+              <PropertyRef Name="COD_CONTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="vw_titulo">
+          <Key>
+            <PropertyRef Name="DESC_CONTA" />
+            <PropertyRef Name="COD_CONTA" />
+            <PropertyRef Name="TIPO" />
+            <PropertyRef Name="COD_TITULO" />
+            <PropertyRef Name="DAT_VENCIMENTO" />
+            <PropertyRef Name="DESCRICAO" />
+            <PropertyRef Name="VALOR" />
+            <PropertyRef Name="VAL_TITULO" />
+            <PropertyRef Name="cod_conta_raiz" />
+          </Key>
+          <Property Name="DESC_RAIZ" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DESC_CONTA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="COD_LANCAMENTO" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="COD_CONTA" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+          <Property Name="TIPO" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="COD_TITULO" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="DAT_CADASTRO" Type="DateTime" Precision="0" />
+          <Property Name="DAT_VENCIMENTO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DESCRICAO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NUM_PARCELA" Type="Int16" />
+          <Property Name="OBSERVACAO" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VALOR" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="VAL_PAGO" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="VAL_TITULO" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="DAT_PAGAMENTO" Type="DateTime" Precision="0" />
+          <Property Name="VAL_RESTANTE" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="NUM_ORDEM" Type="Int16" Nullable="false" />
+          <Property Name="VAL_COR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cod_conta_raiz" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+          <Property Name="seq_parcela" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DAT_PLANEJAMENTO" Type="DateTime" Precision="0" />
+        </EntityType>
+        <Association Name="FK_TB_CARTAO_TB_CONTA">
+          <End Type="FINANCEIROModel.TB_CONTA" Role="TB_CONTA" Multiplicity="0..1" />
+          <End Type="FINANCEIROModel.TB_CARTAO" Role="TB_CARTAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CONTA">
+              <PropertyRef Name="COD_CONTA" />
+            </Principal>
+            <Dependent Role="TB_CARTAO">
+              <PropertyRef Name="COD_CONTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_TITULO_TB_TITULO">
+          <End Type="FINANCEIROModel.TB_TITULO" Role="TB_TITULO" Multiplicity="0..1" />
+          <End Type="FINANCEIROModel.TB_TITULO" Role="TB_TITULO1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_TITULO">
+              <PropertyRef Name="COD_TITULO" />
+            </Principal>
+            <Dependent Role="TB_TITULO1">
+              <PropertyRef Name="COD_TITULO_ORIGEM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_MOVIMENTO_CARTAO_TB_TITULO_a">
+          <End Type="FINANCEIROModel.TB_TITULO" Role="TB_TITULO" Multiplicity="1" />
+          <End Type="FINANCEIROModel.TB_MOVIMENTO_CARTAO" Role="TB_MOVIMENTO_CARTAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_TITULO">
+              <PropertyRef Name="COD_TITULO" />
+            </Principal>
+            <Dependent Role="TB_MOVIMENTO_CARTAO">
+              <PropertyRef Name="COD_TITULO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_MOVIMENTO_CARTAO_TB_TITULO_b">
+          <End Type="FINANCEIROModel.TB_TITULO" Role="TB_TITULO" Multiplicity="0..1" />
+          <End Type="FINANCEIROModel.TB_MOVIMENTO_CARTAO" Role="TB_MOVIMENTO_CARTAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_TITULO">
+              <PropertyRef Name="COD_TITULO" />
+            </Principal>
+            <Dependent Role="TB_MOVIMENTO_CARTAO">
+              <PropertyRef Name="COD_TITULO_DESPESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TB_PARCELA">
+          <Key>
+            <PropertyRef Name="SEQ_PARCELA" />
+          </Key>
+          <Property Name="SEQ_PARCELA" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="SEQ_PARCELAMENTO" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="NUM_PARCELA" Type="Int16" Nullable="false" />
+          <Property Name="COD_TITULO" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="OBSERVACAO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DAT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="TB_PARCELAMENTO" Relationship="FINANCEIROModel.FK_TB_PARCELA_TB_PARCELAMENTO" FromRole="TB_PARCELA" ToRole="TB_PARCELAMENTO" />
+          <NavigationProperty Name="TB_TITULO" Relationship="FINANCEIROModel.FK_TB_PARCELA_TB_PARCELAMENTO1" FromRole="TB_PARCELA" ToRole="TB_TITULO" />
+          <Property Name="VALOR" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="DAT_VENCIMENTO" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="TB_PARCELAMENTO">
+          <Key>
+            <PropertyRef Name="SEQ_PARCELAMENTO" />
+          </Key>
+          <Property Name="SEQ_PARCELAMENTO" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRICAO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="QTD_PARCELA" Type="Int16" Nullable="false" />
+          <Property Name="COD_TITULO" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DAT_INICIO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DAT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OBSERVACAO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TB_PARCELA" Relationship="FINANCEIROModel.FK_TB_PARCELA_TB_PARCELAMENTO" FromRole="TB_PARCELAMENTO" ToRole="TB_PARCELA" />
+          <NavigationProperty Name="TB_TITULO" Relationship="FINANCEIROModel.FK_TB_PARCELAMENTO_TB_TITULO" FromRole="TB_PARCELAMENTO" ToRole="TB_TITULO" />
+          <Property Name="VALOR" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+        </EntityType>
+        <Association Name="FK_TB_PARCELA_TB_PARCELAMENTO">
+          <End Type="FINANCEIROModel.TB_PARCELAMENTO" Role="TB_PARCELAMENTO" Multiplicity="1" />
+          <End Type="FINANCEIROModel.TB_PARCELA" Role="TB_PARCELA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_PARCELAMENTO">
+              <PropertyRef Name="SEQ_PARCELAMENTO" />
+            </Principal>
+            <Dependent Role="TB_PARCELA">
+              <PropertyRef Name="SEQ_PARCELAMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_PARCELA_TB_PARCELAMENTO1">
+          <End Type="FINANCEIROModel.TB_TITULO" Role="TB_TITULO" Multiplicity="0..1" />
+          <End Type="FINANCEIROModel.TB_PARCELA" Role="TB_PARCELA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_TITULO">
+              <PropertyRef Name="COD_TITULO" />
+            </Principal>
+            <Dependent Role="TB_PARCELA">
+              <PropertyRef Name="COD_TITULO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_PARCELAMENTO_TB_TITULO">
+          <End Type="FINANCEIROModel.TB_TITULO" Role="TB_TITULO" Multiplicity="0..1" />
+          <End Type="FINANCEIROModel.TB_PARCELAMENTO" Role="TB_PARCELAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_TITULO">
+              <PropertyRef Name="COD_TITULO" />
+            </Principal>
+            <Dependent Role="TB_PARCELAMENTO">
+              <PropertyRef Name="COD_TITULO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vw_parcelamento">
+          <Key>
+            <PropertyRef Name="seq_parcelamento" />
+            <PropertyRef Name="descricao" />
+            <PropertyRef Name="valor" />
+            <PropertyRef Name="qtd_parcela" />
+            <PropertyRef Name="dat_inicio" />
+          </Key>
+          <Property Name="seq_parcelamento" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descricao" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="valor" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="qtd_parcela" Type="Int16" Nullable="false" />
+          <Property Name="dat_inicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="qtd_parcela_paga" Type="Int32" />
+          <Property Name="valor_pago" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="qtd_mes" Type="Int32" />
+          <Property Name="situacao" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FINANCEIROModelStoreContainer" CdmEntityContainer="FINANCEIROEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FINANCEIROModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_CONTA">
+            <EntityTypeMapping TypeName="FINANCEIROModel.TB_CONTA">
+              <MappingFragment StoreEntitySet="TB_CONTA">
+                <ScalarProperty Name="VAL_COR" ColumnName="VAL_COR" />
+                <ScalarProperty Name="NUM_ORDEM" ColumnName="NUM_ORDEM" />
+                <ScalarProperty Name="COD_CONTA_RAIZ" ColumnName="COD_CONTA_RAIZ" />
+                <ScalarProperty Name="COD_CONTA" ColumnName="COD_CONTA" />
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="OBSERVACAO" ColumnName="OBSERVACAO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_LANCAMENTO">
+            <EntityTypeMapping TypeName="FINANCEIROModel.TB_LANCAMENTO">
+              <MappingFragment StoreEntitySet="TB_LANCAMENTO">
+                <ScalarProperty Name="COD_LANCAMENTO" ColumnName="COD_LANCAMENTO" />
+                <ScalarProperty Name="COD_TITULO" ColumnName="COD_TITULO" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="DATA" ColumnName="DATA" />
+                <ScalarProperty Name="OBSERVACAO" ColumnName="OBSERVACAO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_TITULO">
+            <EntityTypeMapping TypeName="FINANCEIROModel.TB_TITULO">
+              <MappingFragment StoreEntitySet="TB_TITULO">
+                <ScalarProperty Name="DAT_PLANEJAMENTO" ColumnName="DAT_PLANEJAMENTO" />
+                <ScalarProperty Name="COD_TITULO_ORIGEM" ColumnName="COD_TITULO_ORIGEM" />
+                <ScalarProperty Name="DAT_CADASTRO" ColumnName="DAT_CADASTRO" />
+                <ScalarProperty Name="NUM_PARCELA" ColumnName="NUM_PARCELA" />
+                <ScalarProperty Name="COD_TITULO" ColumnName="COD_TITULO" />
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+                <ScalarProperty Name="DAT_VENCIMENTO" ColumnName="DAT_VENCIMENTO" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="COD_CONTA" ColumnName="COD_CONTA" />
+                <ScalarProperty Name="OBSERVACAO" ColumnName="OBSERVACAO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_CARTAO">
+            <EntityTypeMapping TypeName="FINANCEIROModel.TB_CARTAO">
+              <MappingFragment StoreEntitySet="TB_CARTAO">
+                <ScalarProperty Name="COD_CONTA" ColumnName="COD_CONTA" />
+                <ScalarProperty Name="DAT_CADASTRO" ColumnName="DAT_CADASTRO" />
+                <ScalarProperty Name="OBSERVACAO" ColumnName="OBSERVACAO" />
+                <ScalarProperty Name="DIA_VENCIMENTO" ColumnName="DIA_VENCIMENTO" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+                <ScalarProperty Name="COD_CARTAO" ColumnName="COD_CARTAO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_CLASSIFICACAO">
+            <EntityTypeMapping TypeName="FINANCEIROModel.TB_CLASSIFICACAO">
+              <MappingFragment StoreEntitySet="TB_CLASSIFICACAO">
+                <ScalarProperty Name="OBSERVACAO" ColumnName="OBSERVACAO" />
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+                <ScalarProperty Name="COD_CLASSIFICACAO" ColumnName="COD_CLASSIFICACAO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_MOVIMENTO_CARTAO">
+            <EntityTypeMapping TypeName="FINANCEIROModel.TB_MOVIMENTO_CARTAO">
+              <MappingFragment StoreEntitySet="TB_MOVIMENTO_CARTAO">
+                <ScalarProperty Name="COD_TITULO_DESPESA" ColumnName="COD_TITULO_DESPESA" />
+                <ScalarProperty Name="COD_TITULO" ColumnName="COD_TITULO" />
+                <ScalarProperty Name="DAT_CADASTRO" ColumnName="DAT_CADASTRO" />
+                <ScalarProperty Name="OBSERVACAO" ColumnName="OBSERVACAO" />
+                <ScalarProperty Name="NUM_PARCELA" ColumnName="NUM_PARCELA" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="DAT_MOVIMENTO" ColumnName="DAT_MOVIMENTO" />
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+                <ScalarProperty Name="COD_CONTA" ColumnName="COD_CONTA" />
+                <ScalarProperty Name="COD_CARTAO" ColumnName="COD_CARTAO" />
+                <ScalarProperty Name="SEQ_MOVIMENTO" ColumnName="SEQ_MOVIMENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="FINANCEIROModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="FINANCEIROModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="FINANCEIROModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="FINANCEIROModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FINANCEIROModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="FINANCEIROModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FINANCEIROModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="FINANCEIROModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="FINANCEIROModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="vw_titulo">
+            <EntityTypeMapping TypeName="FINANCEIROModel.vw_titulo">
+              <MappingFragment StoreEntitySet="vw_titulo">
+                <ScalarProperty Name="DAT_PLANEJAMENTO" ColumnName="DAT_PLANEJAMENTO" />
+                <ScalarProperty Name="seq_parcela" ColumnName="seq_parcela" />
+                <ScalarProperty Name="cod_conta_raiz" ColumnName="cod_conta_raiz" />
+                <ScalarProperty Name="VAL_COR" ColumnName="VAL_COR" />
+                <ScalarProperty Name="NUM_ORDEM" ColumnName="NUM_ORDEM" />
+                <ScalarProperty Name="VAL_RESTANTE" ColumnName="VAL_RESTANTE" />
+                <ScalarProperty Name="DAT_PAGAMENTO" ColumnName="DAT_PAGAMENTO" />
+                <ScalarProperty Name="VAL_TITULO" ColumnName="VAL_TITULO" />
+                <ScalarProperty Name="VAL_PAGO" ColumnName="VAL_PAGO" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="OBSERVACAO" ColumnName="OBSERVACAO" />
+                <ScalarProperty Name="NUM_PARCELA" ColumnName="NUM_PARCELA" />
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+                <ScalarProperty Name="DAT_VENCIMENTO" ColumnName="DAT_VENCIMENTO" />
+                <ScalarProperty Name="DAT_CADASTRO" ColumnName="DAT_CADASTRO" />
+                <ScalarProperty Name="COD_TITULO" ColumnName="COD_TITULO" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="COD_CONTA" ColumnName="COD_CONTA" />
+                <ScalarProperty Name="COD_LANCAMENTO" ColumnName="COD_LANCAMENTO" />
+                <ScalarProperty Name="DESC_CONTA" ColumnName="DESC_CONTA" />
+                <ScalarProperty Name="DESC_RAIZ" ColumnName="DESC_RAIZ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_PARCELA">
+            <EntityTypeMapping TypeName="FINANCEIROModel.TB_PARCELA">
+              <MappingFragment StoreEntitySet="TB_PARCELA">
+                <ScalarProperty Name="DAT_VENCIMENTO" ColumnName="DAT_VENCIMENTO" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="DAT_CADASTRO" ColumnName="DAT_CADASTRO" />
+                <ScalarProperty Name="OBSERVACAO" ColumnName="OBSERVACAO" />
+                <ScalarProperty Name="COD_TITULO" ColumnName="COD_TITULO" />
+                <ScalarProperty Name="NUM_PARCELA" ColumnName="NUM_PARCELA" />
+                <ScalarProperty Name="SEQ_PARCELAMENTO" ColumnName="SEQ_PARCELAMENTO" />
+                <ScalarProperty Name="SEQ_PARCELA" ColumnName="SEQ_PARCELA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_PARCELAMENTO">
+            <EntityTypeMapping TypeName="FINANCEIROModel.TB_PARCELAMENTO">
+              <MappingFragment StoreEntitySet="TB_PARCELAMENTO">
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="OBSERVACAO" ColumnName="OBSERVACAO" />
+                <ScalarProperty Name="DAT_CADASTRO" ColumnName="DAT_CADASTRO" />
+                <ScalarProperty Name="DAT_INICIO" ColumnName="DAT_INICIO" />
+                <ScalarProperty Name="COD_TITULO" ColumnName="COD_TITULO" />
+                <ScalarProperty Name="QTD_PARCELA" ColumnName="QTD_PARCELA" />
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+                <ScalarProperty Name="SEQ_PARCELAMENTO" ColumnName="SEQ_PARCELAMENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_credito" FunctionName="FINANCEIROModel.Store.sp_credito" />
+          <EntitySetMapping Name="vw_parcelamento">
+            <EntityTypeMapping TypeName="FINANCEIROModel.vw_parcelamento">
+              <MappingFragment StoreEntitySet="vw_parcelamento">
+                <ScalarProperty Name="situacao" ColumnName="situacao" />
+                <ScalarProperty Name="qtd_mes" ColumnName="qtd_mes" />
+                <ScalarProperty Name="valor_pago" ColumnName="valor_pago" />
+                <ScalarProperty Name="qtd_parcela_paga" ColumnName="qtd_parcela_paga" />
+                <ScalarProperty Name="dat_inicio" ColumnName="dat_inicio" />
+                <ScalarProperty Name="qtd_parcela" ColumnName="qtd_parcela" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="seq_parcelamento" ColumnName="seq_parcelamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
